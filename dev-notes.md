@@ -9,6 +9,7 @@ cargo install just
 
 ## Development
 ```sh
+cargo watch -s "just devl"
 cargo watch -s "just devr"
 ```
 

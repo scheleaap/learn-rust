@@ -2,20 +2,22 @@ app_name := "hello"
 
 default: devl
 
-build:
+build_shared:
   cargo fmt
+
+buildr: build_shared
   cross build --target arm-unknown-linux-gnueabihf
 
-test: build
+test:
   echo No tests yet…
 
 lint:
   # cargo check
   cargo clippy
 
-devl: build
-  cargo watch
+devl:
+  cargo run
 
-devr: build
-  rsync -Pv target/arm-unknown-linux-gnueabihf/debug/{{app_name}} pi@framboos:~/dev/learn-rust
-  ssh -t pi@framboos -- /home/pi/dev/learn-rust/{{app_name}}
+devr: buildr
+  rsync -Pv target/arm-unknown-linux-gnueabihf/debug/{{app_name}} pi@braam:~/dev/learn-rust
+  ssh -t pi@braam -- /home/pi/dev/learn-rust/{{app_name}}
