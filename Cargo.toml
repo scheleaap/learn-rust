@@ -11,3 +11,4 @@ embedded-hal-02 = { version = "0.2.7", package="embedded-hal"  }
 linux-embedded-hal = "0.3.2"
 mfrc522 = { version = "0.6.1", features =["std"] }
 tailcall = "0.1.6"
+enum_dispatch = "0.3.12"

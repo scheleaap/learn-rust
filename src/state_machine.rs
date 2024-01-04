@@ -2,19 +2,10 @@ use std::fmt::Debug;
 
 pub trait State {}
 
-
-// #[derive(Debug)]
-// struct Uninitialized;
-//Playing
-// #[derive(Debug)]
-// struct Stopped;
-
 #[derive(Debug)]
-pub struct Playing<'a> {
-    pub currentUri: &'a str,
-}
+pub struct Playing;
 
-impl State for Playing<'_> {}
+impl State for Playing {}
 
 #[derive(Debug)]
 struct Paused;
@@ -25,19 +16,16 @@ pub trait Applicable: Debug {
     fn apply(&self) -> Box<dyn State>;
 }
 
-impl Applicable for Playing<'_> {
+impl Applicable for Playing {
     fn apply(&self) -> Box<dyn State> {
-        todo!()
+        if 0 == 0 {
+            Box::new(Playing)
+        } else {
+            Box::new(Paused)
+        }
     }
 }
 
-fn playing_apply(i: u32) -> impl State {
-    if i > 0 {
-        Playing { currentUri: "new uri" }
-    } else {
-        Paused
-    }
-}
 
 #[cfg(test)]
 mod tests {
@@ -46,13 +34,14 @@ mod tests {
     #[test]
     fn playing_none() {
         // Given
-        let state_before = Playing { currentUri: "uri" };
+        let state_before = Playing;
         let expected_state_after = Paused;
 
         // When
         let actual_state_after = state_before.apply();
 
         // Then
-        assert_eq!(actual_state_after, expected_state_after);
+        let x: Playing = actual_state_after.into();
+        assert_eq!(x, expected_state_after);
     }
 }

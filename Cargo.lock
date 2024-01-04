@@ -73,6 +73,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "enum_dispatch"
+version = "0.3.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "8f33313078bb8d4d05a2733a94ac4c2d8a0df9a2b84424ebf4f33bfc224a890e"
+dependencies = [
+ "once_cell",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.48",
+]
+
+[[package]]
 name = "gpio-cdev"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -111,6 +123,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "embedded-hal",
+ "enum_dispatch",
  "linux-embedded-hal",
  "mfrc522",
  "tailcall",
@@ -219,6 +232,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "once_cell"
+version = "1.19.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3fdb12b2476b595f9358c5161aa467c2438859caa136dec86c26fdd2efe17b92"
+
+[[package]]
 name = "proc-macro2"
 version = "1.0.75"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -316,6 +335,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "syn"
+version = "2.0.48"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0f3531638e407dfc0814761abb7c00a5b54992b849452a0646b7f65c9f770f3f"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "unicode-ident",
+]
+
+[[package]]
 name = "sysfs_gpio"
 version = "0.6.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -341,7 +371,7 @@ checksum = "96e4fec8dea6e415377ba44c8e03602a140b1f45c243da2c83726420888a6335"
 dependencies = [
  "proc-macro2",
  "quote",
- "syn",
+ "syn 1.0.109",
 ]
 
 [[package]]
