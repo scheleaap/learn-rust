@@ -1,3 +1,7 @@
+use std::fmt::Debug;
+mod state_machine;
+use state_machine::*;
+
 fn main() {
     println!("Hello, and welcome to the Rust-based RFID Jukebox!");
 
@@ -11,6 +15,12 @@ fn main() {
         .iter()
         .for_each(|c| println!("Read card of type \"{}\" with UID {}", c.typ, c.uid));
 
+    let x: Box<dyn Applicable> = Box::new(Playing {
+        currentUri: "current URI",
+    });
+    println!("State = {x:?}");
+    x.apply();
+
     println!("Goodbye, for now. 😢")
 }
 
@@ -20,6 +30,6 @@ struct Card<'a> {
     typ: &'a str,
 }
 
-trait CardReader {
+trait CardReader: Debug {
     // fn read(&self) -> Iter<Option<Card>>;
 }
