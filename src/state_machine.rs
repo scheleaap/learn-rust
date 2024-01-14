@@ -1,31 +1,28 @@
 use std::fmt::Debug;
 
-pub trait State {}
-
 #[derive(Debug)]
-pub struct Playing;
-
-impl State for Playing {}
-
-#[derive(Debug)]
-struct Paused;
-
-impl State for Paused {}
-
-pub trait Applicable: Debug {
-    fn apply(&self) -> Box<dyn State>;
+#[derive(PartialEq)]
+struct Paused {
+    foo: u32,
 }
 
-impl Applicable for Playing {
-    fn apply(&self) -> Box<dyn State> {
-        if 0 == 0 {
-            Box::new(Playing)
-        } else {
-            Box::new(Paused)
-        }
-    }
+#[derive(Debug)]
+#[derive(PartialEq)]
+pub struct Playing {
+    foo: u32,
 }
 
+#[derive(Debug)]
+#[derive(PartialEq)]
+pub enum State {
+    Playing(Playing),
+    Paused(Paused),
+}
+
+
+fn apply(old: State) -> State {
+    old
+}
 
 #[cfg(test)]
 mod tests {
@@ -34,14 +31,13 @@ mod tests {
     #[test]
     fn playing_none() {
         // Given
-        let state_before = Playing;
-        let expected_state_after = Paused;
+        let state_before = State::Paused(Paused { foo: 1 });
+        let expected_state_after = State::Paused(Paused { foo: 1 });
 
         // When
-        let actual_state_after = state_before.apply();
+        let actual_state_after: State = apply(state_before);
 
         // Then
-        let x: Playing = actual_state_after.into();
-        assert_eq!(x, expected_state_after);
+        assert_eq!(actual_state_after, expected_state_after);
     }
 }
